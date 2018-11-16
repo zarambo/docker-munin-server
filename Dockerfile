@@ -11,12 +11,12 @@ RUN rm /etc/nginx/sites-enabled/default && mkdir -p /var/cache/munin/www && chow
 VOLUME /var/lib/munin
 VOLUME /var/log/munin
 
-ADD ./munin.conf /etc/munin/munin.conf
-ADD ./nginx.conf /etc/nginx/nginx.conf
-ADD ./nginx-munin /etc/nginx/sites-enabled/munin
-ADD ./start-munin.sh /munin
-ADD ./munin-graph-logging.patch /usr/share/munin
-ADD ./munin-update-logging.patch /usr/share/munin
+ADD docker/munin/munin.conf /etc/munin/munin.conf
+ADD docker/munin/nginx.conf /etc/nginx/nginx.conf
+ADD docker/munin/nginx-munin /etc/nginx/sites-enabled/munin
+ADD docker/munin/start-munin.sh /munin
+ADD docker/munin/munin-graph-logging.patch /usr/share/munin
+ADD docker/munin/munin-update-logging.patch /usr/share/munin
 
 RUN cd /usr/share/munin && patch munin-graph < munin-graph-logging.patch && patch munin-update < munin-update-logging.patch
 
